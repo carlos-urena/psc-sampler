@@ -5,7 +5,7 @@ This repository includes code for two maps and a tool to visualize those maps. I
 **Stratified Sampling of Projected Spherical Caps**  
 Carlos Ureña and Iliyan Georgiev.  
 EG Symposium on Rendering 2018 (CGF Track), Karlsruhe, July 2018.  
-PDF available at: [http://iliyan.com/publications/ProjectedSphericalCaps]  
+PDF available at: http://iliyan.com/publications/ProjectedSphericalCaps  
 
 ## Prerequisites
 
