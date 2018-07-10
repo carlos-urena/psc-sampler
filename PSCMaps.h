@@ -595,9 +595,6 @@ void PSCMaps<T>::compute_ELF_xlyl_phi_l()
 
    // compute F
    F = T(2.0)*(E+L) ;
-
-   if ( F < 1e-6 )
-      invisible = true ;
 }
 
 // --------------------------------------------------------------------------
