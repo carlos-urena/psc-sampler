@@ -78,30 +78,30 @@ class PSCMaps
    void eval_map( T s, T t, T &x, T &y ) const ;
 
    // returns the area of the projected spherical cap (straight inline returns)
-   inline T get_area();
+   inline T get_area() const;
 
    // true iif  the sampler has been initialized via 'initialize'
    // any other method should not be called for uninitialized objects
-   inline bool is_initialized() ;
+   inline bool is_initialized() const ;
 
    // true if the radial map is in use
-   inline bool is_using_radial();
+   inline bool is_using_radial() const ;
 
    // query spherical map status (straight inline returns)
-   inline bool is_fully_visible();     // true iif  0 <= alpha <= beta  (sphere fully visible)
-   inline bool is_partially_visible(); // true iif  -alpha <= beta <= alpha (sphere partially visible)
-   inline bool is_invisible() ;        // true iif  beta <= -alpha <= 0 (sphere fully invisible)
-   inline bool is_center_below_hor();  // true iif  beta <= 0 (spherical cap center is below horizon)
+   inline bool is_fully_visible() const ;     // true iif  0 <= alpha <= beta  (sphere fully visible)
+   inline bool is_partially_visible() const ; // true iif  -alpha <= beta <= alpha (sphere partially visible)
+   inline bool is_invisible() const ;        // true iif  beta <= -alpha <= 0 (sphere fully invisible)
+   inline bool is_center_below_hor() const ;  // true iif  beta <= 0 (spherical cap center is below horizon)
 
    // functions for querying the spherical cap parameters
    // (straight inline returns)
 
-   inline T get_xe() ;    // xe: ellipse center
-   inline T get_ax() ;    // ax: ellipse semi-minor axis length (width)
-   inline T get_ay() ;    // ay: ellipse semi-major axis length (height)
-   inline T get_xl() ;    // xl: X coord. of lune-ellipse tangency points (only when partially visible)
-   inline T get_yl() ;    // yl: Y coord. of lune-ellipse tangency points (only when partially visible)
-   inline T get_phi_l() ; // phi_l: tangency points angle (only when partially visible and using radial map)
+   inline T get_xe() const ;     // xe: ellipse center
+   inline T get_ax() const ;     // ax: ellipse semi-minor axis length (width)
+   inline T get_ay() const ;     // ay: ellipse semi-major axis length (height)
+   inline T get_xl() const ;     // xl: X coord. of lune-ellipse tangency points (only when partially visible)
+   inline T get_yl() const ;     // yl: Y coord. of lune-ellipse tangency points (only when partially visible)
+   inline T get_phi_l() const  ; // phi_l: tangency points angle (only when partially visible and using radial map)
 
    // functions for evaluating the integrals and their inverses
 
@@ -125,9 +125,9 @@ class PSCMaps
    // --------------------------------------------------------------------------
    private:
 
-   inline void ensure_initialized();
-   inline void ensure_using_radial();
-   inline void ensure_using_parallel();
+   inline void ensure_initialized() const ;
+   inline void ensure_using_radial() const ;
+   inline void ensure_using_parallel() const ;
 
    // aux. methods
    void compute_ELF_xlyl_phi_l();
@@ -302,7 +302,7 @@ using namespace std ;
 // --------------------------------------------------------------------------
 
 template< class T >
-inline T PSCMaps<T>::get_area()
+inline T PSCMaps<T>::get_area()  const
 {
    ensure_initialized();
    return F ;
@@ -310,7 +310,7 @@ inline T PSCMaps<T>::get_area()
 // -------------------------------------------------------------------------
 
 template< class T >
-inline T PSCMaps<T>::get_xe()
+inline T PSCMaps<T>::get_xe() const
 {
    ensure_initialized();
    return xe ;
@@ -318,7 +318,7 @@ inline T PSCMaps<T>::get_xe()
 // -------------------------------------------------------------------------
 
 template< class T >
-inline T PSCMaps<T>::get_ax()
+inline T PSCMaps<T>::get_ax() const
 {
    ensure_initialized();
    return ax ;
@@ -326,7 +326,7 @@ inline T PSCMaps<T>::get_ax()
 // -------------------------------------------------------------------------
 
 template< class T >
-inline T PSCMaps<T>::get_ay()
+inline T PSCMaps<T>::get_ay() const
 {
    ensure_initialized();
    return ay ;
@@ -334,7 +334,7 @@ inline T PSCMaps<T>::get_ay()
 // -------------------------------------------------------------------------
 
 template< class T >
-inline T PSCMaps<T>::get_xl()
+inline T PSCMaps<T>::get_xl() const
 {
    ensure_initialized();
    return xl ;
@@ -342,7 +342,7 @@ inline T PSCMaps<T>::get_xl()
 // -------------------------------------------------------------------------
 
 template< class T >
-inline T PSCMaps<T>::get_yl()
+inline T PSCMaps<T>::get_yl() const
 {
    ensure_initialized();
    return yl ;
@@ -350,7 +350,7 @@ inline T PSCMaps<T>::get_yl()
 // -------------------------------------------------------------------------
 
 template< class T >
-inline T PSCMaps<T>::get_phi_l()
+inline T PSCMaps<T>::get_phi_l() const
 {
    ensure_initialized();
    if ( do_checks )
@@ -360,14 +360,14 @@ inline T PSCMaps<T>::get_phi_l()
 // -------------------------------------------------------------------------
 
 template< class T >
-inline bool PSCMaps<T>::is_initialized()
+inline bool PSCMaps<T>::is_initialized() const
 {
    return initialized ;
 }
 // -------------------------------------------------------------------------
 
 template< class T >
-inline bool PSCMaps<T>::is_invisible()
+inline bool PSCMaps<T>::is_invisible() const
 {
    ensure_initialized();
    return invisible ;
@@ -375,7 +375,7 @@ inline bool PSCMaps<T>::is_invisible()
 // -------------------------------------------------------------------------
 
 template< class T >
-inline bool PSCMaps<T>::is_partially_visible()
+inline bool PSCMaps<T>::is_partially_visible() const
 {
    ensure_initialized();
    return partially_visible ;
@@ -383,7 +383,7 @@ inline bool PSCMaps<T>::is_partially_visible()
 // -------------------------------------------------------------------------
 
 template< class T >
-inline bool PSCMaps<T>::is_fully_visible()
+inline bool PSCMaps<T>::is_fully_visible() const
 {
    ensure_initialized();
    return fully_visible ;
@@ -391,7 +391,7 @@ inline bool PSCMaps<T>::is_fully_visible()
 // -------------------------------------------------------------------------
 
 template< class T >
-inline bool PSCMaps<T>::is_center_below_hor()
+inline bool PSCMaps<T>::is_center_below_hor() const
 {
    ensure_initialized();
    return center_below_hor ;
@@ -399,7 +399,7 @@ inline bool PSCMaps<T>::is_center_below_hor()
 // -------------------------------------------------------------------------
 
 template< class T >
-inline bool PSCMaps<T>::is_using_radial()
+inline bool PSCMaps<T>::is_using_radial() const
 {
    ensure_initialized();
    return using_radial ;
@@ -433,7 +433,7 @@ PSCMaps<T>::PSCMaps( )
 // various checking functions
 
 template< class T >
-inline void PSCMaps<T>::ensure_initialized()
+inline void PSCMaps<T>::ensure_initialized() const
 {
    if ( do_checks )
       assert( initialized );
@@ -441,7 +441,7 @@ inline void PSCMaps<T>::ensure_initialized()
 // --------------------------------------------------------------------------
 
 template< class T >
-inline void PSCMaps<T>::ensure_using_radial()
+inline void PSCMaps<T>::ensure_using_radial() const
 {
    if ( do_checks )
    {
@@ -453,7 +453,7 @@ inline void PSCMaps<T>::ensure_using_radial()
 // --------------------------------------------------------------------------
 
 template< class T >
-inline void PSCMaps<T>::ensure_using_parallel()
+inline void PSCMaps<T>::ensure_using_parallel() const
 {
    if ( do_checks )
    {
