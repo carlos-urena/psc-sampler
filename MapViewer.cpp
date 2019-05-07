@@ -25,6 +25,8 @@
 
 #include <PSCMaps.h> // maps implementation
 
+#define GL_SILENCE_DEPRECATION // needed on latest macOS OS versions
+
 #include <GLFW/glfw3.h>  // GLFW
 #include <AntTweakBar.h> // Anttweak bar GUI
 
@@ -32,6 +34,7 @@ using namespace PSCM ; // projected spherical cap map namespace (see 'PSCMaps.h'
 using namespace std ;
 
 #include <GVec.h>
+
 
 // --------------------------------------------------------------------------
 // type definitions

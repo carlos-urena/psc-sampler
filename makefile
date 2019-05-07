@@ -27,7 +27,7 @@ ifeq ($(uname),Darwin)
    os           := OSX
    lib_gl       := -framework OpenGL
    lib_aux      :=
-   comp         := clang++
+   comp         := clang++ 
    lib_glfw     := -lglfw
    lib_atb      := -lAntTweakBar
    lib_path_cmd :=
